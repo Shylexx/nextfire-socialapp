@@ -1,27 +1,13 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import 'firebase/compat/storage';
+import firebaseConfig from "./firebaseConfig";
+import { initializeApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBofdmUVYHg1Eei42zXPAtB9W8yoVyfS6Q",
-    authDomain: "nextsocial-app-17bef.firebaseapp.com",
-    projectId: "nextsocial-app-17bef",
-    storageBucket: "nextsocial-app-17bef.appspot.com",
-    messagingSenderId: "511822486688",
-    appId: "1:511822486688:web:bf5053651c14bb87fe7dc5",
-    measurementId: "G-JBZFXR5XYK"
-};
+// Init firebase
+const firebaseApp = initializeApp(firebaseConfig);
 
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig)
-}
+// Init auth and firestore with firebaseApp property
+export const auth = getAuth(firebaseApp);
+export const firestore = getFirestore(firebaseApp);
 
-export const auth = firebase.auth();
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
-
-
-  
+export default firebaseApp;
